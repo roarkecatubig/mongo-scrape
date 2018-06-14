@@ -1,0 +1,49 @@
+<!-- 5. Output the animalType string, pet boolean and fierceness number to the page for all the animals. -->
+<ul>
+  {{#each articles}}
+    <li data-id={{_id}}>
+      <p>Title: {{title}}</p>
+      <p>Link: {{link}}</p>
+      <button type="button" class="btn btn-primary view_comments" data-toggle="modal" data-target="#myModal">View Comments</button>
+      <button type="button" class="btn btn-secondary remove_article">Remove Article</button>
+        
+      {{!-- <p>Fierceness: {{fierceness}}</p> --}}
+    </li>
+  {{/each}}
+  <div class="modal" id="myModal">
+    <div class="modal-dialog">
+    <div class="modal-content">
+
+        <!-- Modal Header -->
+        <div class="modal-header">
+        <h4 class="modal-title"></h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+
+        <!-- Modal body -->
+        <div class="modal-body">
+        <div id="all_notes">
+
+        </div>
+        <form>
+            <div class="form-group">
+                <label for="recipient-name" class="col-form-label">Title:</label>
+                <input type="text" class="form-control" id="titleinput">
+          </div>
+            <div class="form-group">
+                <label for="message-text" class="col-form-label">New Note:</label>
+                <textarea class="form-control" id="bodyinput"></textarea>
+            </div>
+        </form>
+        </div>
+
+        <!-- Modal footer -->
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary submit_note">Save Note</button>
+        </div>
+
+    </div>
+    </div>
+</div>
+</ul>

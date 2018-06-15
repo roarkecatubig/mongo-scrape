@@ -40,13 +40,11 @@ mongoose.Promise = Promise;
 mongoose.connect(MONGODB_URI);
 
 
-// Connect to the Mongo DB
-// mongoose.connect("mongodb://localhost/week18Populater");
+// Routes
 
-// A GET route for scraping the echoJS website
+// A GET route for scraping the NYtimes website
 app.get("/scrape", function(req, res) {
   // First, we grab the body of the html with request
-//   axios.get("http://www.echojs.com/").then(function(response) {
     axios.get("https://www.nytimes.com/").then(function(response) {
     // Then, we load that into cheerio and save it to $ for a shorthand selector
     var $ = cheerio.load(response.data);
@@ -92,7 +90,6 @@ app.get("/", function(req, res) {
 
 
       // If we were able to successfully find Articles, send them back to the client
-    //   res.json(dbArticle);
       res.render("index", hbsObject)
     })
     .catch(function(err) {
@@ -118,6 +115,7 @@ app.get("/articles/:id", function(req, res) {
     });
 });
 
+// Deletes a note from the notes array stored in the article
 app.put("/delete/:article_id/:note_id", function(req, res) {
     db.Article.findOneAndUpdate({_id: req.params.article_id}, {$pull: {note: req.params.note_id}}, { new: true})
     .then(function(dbArticle) {
@@ -130,8 +128,8 @@ app.put("/delete/:article_id/:note_id", function(req, res) {
 
 })
 
+// Deletes a note directly
 app.post("/notes/delete/:note_id", function(req, res) {
-  
     db.Note.findByIdAndRemove({_id: req.params.note_id})
     .then(function(dbNote) {
       res.json(dbNote);
@@ -141,6 +139,7 @@ app.post("/notes/delete/:note_id", function(req, res) {
     })
 })
 
+// Delete an article from the list of articles
 app.post("/article/delete/:article_id", function(req, res) {
     db.Article.findByIdAndRemove({_id: req.params.article_id})
     .then(function(dbNote) {
@@ -151,6 +150,7 @@ app.post("/article/delete/:article_id", function(req, res) {
     })
 })
 
+// Clears all the articles in the db. Predominantly for testing purposes
 app.post("/articles/delete/all", function(req, res) {
   db.Article.remove({})
   .then(function(data) {

@@ -1,6 +1,7 @@
 // Make sure we wait to attach our handlers until the DOM is fully loaded.
 $(function() {
 
+  // Grabs the notes from a clicked article 
   function getNotes(id) {
     $("#all_notes").empty();
     $.ajax({
@@ -63,15 +64,13 @@ $(function() {
     $(".submit_note").attr("data-id", id)
   }
 
-
+// Event handler that checks for a "View Comments" button to be clicked and then renders the notes for the appropriate article by grabbing the data-id attribute, which is the article ObjectID
   $(document).on("click", ".view_comments", function() {
     var article_id = $(this).parent().attr("data-id");
     getNotes(article_id)
-
-
-  
   })
 
+// Event handler that deletes the note reference in the article's notes array
   $(document).on("click", ".delete_button", function () {
     var noteId = $(this).attr("data-id");
     var article_id = $(this).parent().parent().parent().attr("article-id");
@@ -84,6 +83,7 @@ $(function() {
 
     .then(function(data) {
       console.log("Note deleted from article array")
+      // Deletes the note itself
       $.ajax({
         method: "POST",
         url: "/notes/delete/" + noteId
@@ -96,6 +96,7 @@ $(function() {
 
   })
 
+  // Handles the "Submit Note" event handler to post the note to the db and saves the reference to the appropriate article
   $(document).on("click", ".submit_note", function() {
     // Grab the id associated with the article from the submit button
     var thisId = $(this).attr("data-id");
@@ -121,9 +122,9 @@ $(function() {
         getNotes(thisId)
       });
 
-
   });
 
+// Event handler that removes an article from the list 
   $(document).on("click", ".remove_article", function() {
     var article_id = $(this).parent().attr("data-id");
     $.ajax({
@@ -136,6 +137,7 @@ $(function() {
     });
   });
 
+  // Scrapes the NY Times website for news articles
   $(document).on("click", ".scrape_articles", function() {
     $.ajax({
       method: "GET",
@@ -147,6 +149,7 @@ $(function() {
     })
   });
 
+  // Deletes all of the articles saved to the db. Clears the page fully. 
   $(document).on("click", ".clear_articles", function() {
     $.ajax({
       method: "POST",

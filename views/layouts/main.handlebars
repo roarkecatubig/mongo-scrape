@@ -6,19 +6,19 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    {{!-- <script src="../../public/app.js"><{{!}}/script> --}}
     <script src="/assets/js/app.js"></script>
+    <link rel="stylesheet" type="text/css" href="/assets/css/styles.css">
+    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 	<meta charset="UTF-8">
 		<title>Mongo-Scrape Articles</title>
 	</head>
 	<body>
         <div class="jumbotron jumbotron-fluid">
             <div class="container">
-                <h1 class="display-4">Mongo-Scrape Homework</h1>
-                <p class="lead">Why did you have to make it so we HAVE to use handlebars...</p>
+                <h1 class="display-4" id="jumbotron-title">Mongo-Scrape Homework</h1>
+                <p id="jumbotron-description" class="lead">Scrape the NY Times and makes notes on each of these articles!</p>
                 <button type="button" class="btn btn-info scrape_articles">Scrape Articles</button>
                 <button type="button" class="btn btn-danger clear_articles">Clear Scraped Articles</button>
-
             </div>
         </div>
         <div class="container">

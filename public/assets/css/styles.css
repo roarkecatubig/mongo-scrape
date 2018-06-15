@@ -1,0 +1,15 @@
+.jumbotron {
+    background-image: url("../images/background-colored-parquet-450066.jpg");
+    /* background-position: left top; */
+}
+
+#jumbotron-title {
+    text-align: center;
+    font-family: 'Nunito', sans-serif;
+}
+
+#jumbotron-description {
+    text-align: center;
+    font-weight: bold;
+}
+

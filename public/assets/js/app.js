@@ -2,7 +2,7 @@
 $(function() {
 
   // Grabs the notes from a clicked article 
-  function getNotes(id) {
+  function getNotes(id, title) {
     $("#all_notes").empty();
     $.ajax({
       method: "GET",
@@ -23,6 +23,7 @@ $(function() {
             var noteTable = $("<table>");
             noteTable.addClass("table");
             noteTable.attr("article-id", id);
+            noteTable.attr("article_title", title);
 
             var tableHead = $("<thead>");
             tableHeadRow = $("<tr>");
@@ -60,20 +61,23 @@ $(function() {
         }
       });
 
-    $(".modal-title").text("Notes for " + id)
+    $(".modal-title").text(title)
     $(".submit_note").attr("data-id", id)
   }
 
 // Event handler that checks for a "View Comments" button to be clicked and then renders the notes for the appropriate article by grabbing the data-id attribute, which is the article ObjectID
   $(document).on("click", ".view_comments", function() {
     var article_id = $(this).parent().attr("data-id");
-    getNotes(article_id)
+    var article_title = $(this).parent().attr("data-title")
+    console.log(article_title)
+    getNotes(article_id, article_title)
   })
 
 // Event handler that deletes the note reference in the article's notes array
   $(document).on("click", ".delete_button", function () {
     var noteId = $(this).attr("data-id");
     var article_id = $(this).parent().parent().parent().attr("article-id");
+    var article_title = $(this).parent().parent().parent().attr("article-title");
 
     $.ajax({
       method: "PUT",
@@ -89,7 +93,7 @@ $(function() {
         url: "/notes/delete/" + noteId
       }).then(function(new_data) {
         console.log("note deleted from notes collection")
-        getNotes(article_id)
+        getNotes(article_id, article_title)
       });
     })
     
@@ -100,6 +104,7 @@ $(function() {
   $(document).on("click", ".submit_note", function() {
     // Grab the id associated with the article from the submit button
     var thisId = $(this).attr("data-id");
+    var article_title = $(this).parent().parent().children("div").children("div").children("table.table").attr("article_title");
 
     // Run a POST request to change the note, using what's entered in the inputs
     $.ajax({
@@ -119,7 +124,7 @@ $(function() {
         // Empty the notes section
         $("#titleinput").val("");
         $("#bodyinput").val("");
-        getNotes(thisId)
+        getNotes(thisId, article_title)
       });
 
   });

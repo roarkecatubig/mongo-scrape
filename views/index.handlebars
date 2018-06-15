@@ -1,12 +1,15 @@
-<!-- 5. Output the animalType string, pet boolean and fierceness number to the page for all the animals. -->
-<ul>
   {{#each articles}}
-    <li data-id={{_id}}>
-      <p>Title: {{title}}</p>
-      <p>Link: {{link}}</p>
-      <button type="button" class="btn btn-primary view_comments" data-toggle="modal" data-target="#myModal">View Comments</button>
-      <button type="button" class="btn btn-secondary remove_article">Remove Article</button>
-    </li>
+    <div class="card">
+        <div class="card-header">
+            Date: {{date}}, Time: {{time}}
+        </div>
+        <div class="card-body" data-id={{_id}} data-title="{{title}}">
+            <h5 class="card-title"><a href={{link}} target="_blank">{{title}}</a></h5>
+            <p class="card-text">{{summary}}</p>
+            <button type="button" class="btn btn-primary view_comments" data-toggle="modal" data-target="#myModal">View Comments</button>
+            <button type="button" class="btn btn-secondary remove_article">Remove Article</button>
+        </div>
+    </div>
   {{/each}}
   <div class="modal" id="myModal">
     <div class="modal-dialog">
@@ -25,11 +28,11 @@
         </div>
         <form>
             <div class="form-group">
-                <label for="recipient-name" class="col-form-label">Title:</label>
+                <label for="recipient-name" class="col-form-label">New Comment Title:</label>
                 <input type="text" class="form-control" id="titleinput">
           </div>
             <div class="form-group">
-                <label for="message-text" class="col-form-label">New Note:</label>
+                <label for="message-text" class="col-form-label">New Comment Body:</label>
                 <textarea class="form-control" id="bodyinput"></textarea>
             </div>
         </form>
@@ -38,10 +41,9 @@
         <!-- Modal footer -->
         <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary submit_note">Save Note</button>
+            <button type="button" class="btn btn-primary submit_note">Post Comment</button>
         </div>
 
     </div>
     </div>
 </div>
-</ul>

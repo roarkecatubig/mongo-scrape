@@ -1,6 +1,9 @@
+body {
+    background-image: url("../images/funky-lines.png");
+}
+
 .jumbotron {
     background-image: url("../images/background-colored-parquet-450066.jpg");
-    /* background-position: left top; */
 }
 
 #jumbotron-title {
@@ -11,5 +14,9 @@
 #jumbotron-description {
     text-align: center;
     font-weight: bold;
+}
+
+.card {
+    margin-bottom: 1.5%;
 }
 
